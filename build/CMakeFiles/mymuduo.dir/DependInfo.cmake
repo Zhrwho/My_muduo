@@ -9,8 +9,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/me/mymuduo/Acceptor.cc" "CMakeFiles/mymuduo.dir/Acceptor.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Acceptor.cc.o.d"
+  "/home/me/mymuduo/InetAddress.cc" "CMakeFiles/mymuduo.dir/InetAddress.cc.o" "gcc" "CMakeFiles/mymuduo.dir/InetAddress.cc.o.d"
+  "/home/me/mymuduo/Logger.cc" "CMakeFiles/mymuduo.dir/Logger.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Logger.cc.o.d"
   "/home/me/mymuduo/TcpConnection.cc" "CMakeFiles/mymuduo.dir/TcpConnection.cc.o" "gcc" "CMakeFiles/mymuduo.dir/TcpConnection.cc.o.d"
   "/home/me/mymuduo/TcpServer.cc" "CMakeFiles/mymuduo.dir/TcpServer.cc.o" "gcc" "CMakeFiles/mymuduo.dir/TcpServer.cc.o.d"
+  "/home/me/mymuduo/Timestamp.cc" "CMakeFiles/mymuduo.dir/Timestamp.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Timestamp.cc.o.d"
   )
 
 # Targets to which this target links.

@@ -3,10 +3,16 @@ file(REMOVE_RECURSE
   "../lib/libmymuduo.so"
   "CMakeFiles/mymuduo.dir/Acceptor.cc.o"
   "CMakeFiles/mymuduo.dir/Acceptor.cc.o.d"
+  "CMakeFiles/mymuduo.dir/InetAddress.cc.o"
+  "CMakeFiles/mymuduo.dir/InetAddress.cc.o.d"
+  "CMakeFiles/mymuduo.dir/Logger.cc.o"
+  "CMakeFiles/mymuduo.dir/Logger.cc.o.d"
   "CMakeFiles/mymuduo.dir/TcpConnection.cc.o"
   "CMakeFiles/mymuduo.dir/TcpConnection.cc.o.d"
   "CMakeFiles/mymuduo.dir/TcpServer.cc.o"
   "CMakeFiles/mymuduo.dir/TcpServer.cc.o.d"
+  "CMakeFiles/mymuduo.dir/Timestamp.cc.o"
+  "CMakeFiles/mymuduo.dir/Timestamp.cc.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -153,6 +153,54 @@ Acceptor.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Acceptor.cc.s
 .PHONY : Acceptor.cc.s
 
+InetAddress.o: InetAddress.cc.o
+.PHONY : InetAddress.o
+
+# target to build an object file
+InetAddress.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/InetAddress.cc.o
+.PHONY : InetAddress.cc.o
+
+InetAddress.i: InetAddress.cc.i
+.PHONY : InetAddress.i
+
+# target to preprocess a source file
+InetAddress.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/InetAddress.cc.i
+.PHONY : InetAddress.cc.i
+
+InetAddress.s: InetAddress.cc.s
+.PHONY : InetAddress.s
+
+# target to generate assembly for a file
+InetAddress.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/InetAddress.cc.s
+.PHONY : InetAddress.cc.s
+
+Logger.o: Logger.cc.o
+.PHONY : Logger.o
+
+# target to build an object file
+Logger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Logger.cc.o
+.PHONY : Logger.cc.o
+
+Logger.i: Logger.cc.i
+.PHONY : Logger.i
+
+# target to preprocess a source file
+Logger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Logger.cc.i
+.PHONY : Logger.cc.i
+
+Logger.s: Logger.cc.s
+.PHONY : Logger.s
+
+# target to generate assembly for a file
+Logger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Logger.cc.s
+.PHONY : Logger.cc.s
+
 TcpConnection.o: TcpConnection.cc.o
 .PHONY : TcpConnection.o
 
@@ -201,6 +249,30 @@ TcpServer.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/TcpServer.cc.s
 .PHONY : TcpServer.cc.s
 
+Timestamp.o: Timestamp.cc.o
+.PHONY : Timestamp.o
+
+# target to build an object file
+Timestamp.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Timestamp.cc.o
+.PHONY : Timestamp.cc.o
+
+Timestamp.i: Timestamp.cc.i
+.PHONY : Timestamp.i
+
+# target to preprocess a source file
+Timestamp.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Timestamp.cc.i
+.PHONY : Timestamp.cc.i
+
+Timestamp.s: Timestamp.cc.s
+.PHONY : Timestamp.s
+
+# target to generate assembly for a file
+Timestamp.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Timestamp.cc.s
+.PHONY : Timestamp.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,12 +285,21 @@ help:
 	@echo "... Acceptor.o"
 	@echo "... Acceptor.i"
 	@echo "... Acceptor.s"
+	@echo "... InetAddress.o"
+	@echo "... InetAddress.i"
+	@echo "... InetAddress.s"
+	@echo "... Logger.o"
+	@echo "... Logger.i"
+	@echo "... Logger.s"
 	@echo "... TcpConnection.o"
 	@echo "... TcpConnection.i"
 	@echo "... TcpConnection.s"
 	@echo "... TcpServer.o"
 	@echo "... TcpServer.i"
 	@echo "... TcpServer.s"
+	@echo "... Timestamp.o"
+	@echo "... Timestamp.i"
+	@echo "... Timestamp.s"
 .PHONY : help
 
 
