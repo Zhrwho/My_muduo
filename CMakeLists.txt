@@ -13,5 +13,3 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -fPIC")
 aux_source_directory(. SRC_LIST)
 #编译生成动态库mymuduo(SHARED：动态库)
 add_library(mymuduo SHARED ${SRC_LIST})
-
-
