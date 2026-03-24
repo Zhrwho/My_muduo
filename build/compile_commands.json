@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Acceptor.cc.o -c /home/me/mymuduo/Acceptor.cc",
+  "file": "/home/me/mymuduo/Acceptor.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/TcpConnection.cc.o -c /home/me/mymuduo/TcpConnection.cc",
+  "file": "/home/me/mymuduo/TcpConnection.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/TcpServer.cc.o -c /home/me/mymuduo/TcpServer.cc",
+  "file": "/home/me/mymuduo/TcpServer.cc"
+}
+]
