@@ -9,10 +9,11 @@
 
 #include "noncopyable.h"
 #include "Timestamp.h"
+#include "EventLoop.h"
 #include <functional>
 #include <memory>
 
-class EventLoop;
+
 
 /**
  * @brief 封装了socket及其感兴趣的event
@@ -51,7 +52,6 @@ public:
     int events() const { return events_; }  
     /* 设置channel对应fd发生的事件, epoll监听后设置的*/
     void set_revents(int revt) { revents_ = revt; }
-    bool isNoneEvent() const { return revents_ == KNoneEvent; }
 
     /* 让channel对读感兴趣 */
     void enableReading()  { events_ |=  KReadEvent ; update(); }

@@ -6,6 +6,21 @@
 },
 {
   "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Channel.cc.o -c /home/me/mymuduo/Channel.cc",
+  "file": "/home/me/mymuduo/Channel.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/EpollPoller.cc.o -c /home/me/mymuduo/EpollPoller.cc",
+  "file": "/home/me/mymuduo/EpollPoller.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/EventLoop.cc.o -c /home/me/mymuduo/EventLoop.cc",
+  "file": "/home/me/mymuduo/EventLoop.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
   "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/InetAddress.cc.o -c /home/me/mymuduo/InetAddress.cc",
   "file": "/home/me/mymuduo/InetAddress.cc"
 },
@@ -13,6 +28,11 @@
   "directory": "/home/me/mymuduo/build",
   "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Logger.cc.o -c /home/me/mymuduo/Logger.cc",
   "file": "/home/me/mymuduo/Logger.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Poller.cc.o -c /home/me/mymuduo/Poller.cc",
+  "file": "/home/me/mymuduo/Poller.cc"
 },
 {
   "directory": "/home/me/mymuduo/build",
