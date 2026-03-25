@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/me/mymuduo/Acceptor.cc" "CMakeFiles/mymuduo.dir/Acceptor.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Acceptor.cc.o.d"
   "/home/me/mymuduo/Channel.cc" "CMakeFiles/mymuduo.dir/Channel.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Channel.cc.o.d"
+  "/home/me/mymuduo/CurrentThread.cc" "CMakeFiles/mymuduo.dir/CurrentThread.cc.o" "gcc" "CMakeFiles/mymuduo.dir/CurrentThread.cc.o.d"
   "/home/me/mymuduo/EpollPoller.cc" "CMakeFiles/mymuduo.dir/EpollPoller.cc.o" "gcc" "CMakeFiles/mymuduo.dir/EpollPoller.cc.o.d"
   "/home/me/mymuduo/EventLoop.cc" "CMakeFiles/mymuduo.dir/EventLoop.cc.o" "gcc" "CMakeFiles/mymuduo.dir/EventLoop.cc.o.d"
   "/home/me/mymuduo/InetAddress.cc" "CMakeFiles/mymuduo.dir/InetAddress.cc.o" "gcc" "CMakeFiles/mymuduo.dir/InetAddress.cc.o.d"
