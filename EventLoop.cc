@@ -7,9 +7,10 @@
 #include "EventLoop.h"
 #include "Poller.h"
 #include "Logger.h"
+#include "Channel.h"
 #include <unistd.h>
 #include <sys/eventfd.h>
-#include<memory>
+#include <memory>
 #include <mutex>
 
 /* 防止一个线程创建多个EventLoop   thread_local 每个线程都有自己的一份 t_loopInThisThread*/
@@ -177,7 +178,7 @@ void EventLoop::handleRead()
 //Eventloop的方法 -》 Poller 的方法
 void EventLoop::updateChannel(Channel* channel) { poller_->updateChannel(channel); }
 void EventLoop::removeChannel(Channel* channel) { poller_->removeChannel(channel); }
-bool EventLoop::hasChannel(Channel* channel) { poller_ -> hasChannel(channel); }
+bool EventLoop::hasChannel(Channel* channel) { return poller_ -> hasChannel(channel); }
 
 /**
  * @brief 执行在其他线程加入的回调函数
