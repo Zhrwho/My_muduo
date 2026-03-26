@@ -51,6 +51,11 @@
 },
 {
   "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Socket.cc.o -c /home/me/mymuduo/Socket.cc",
+  "file": "/home/me/mymuduo/Socket.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
   "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/TcpConnection.cc.o -c /home/me/mymuduo/TcpConnection.cc",
   "file": "/home/me/mymuduo/TcpConnection.cc"
 },

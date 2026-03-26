@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/me/mymuduo/InetAddress.cc" "CMakeFiles/mymuduo.dir/InetAddress.cc.o" "gcc" "CMakeFiles/mymuduo.dir/InetAddress.cc.o.d"
   "/home/me/mymuduo/Logger.cc" "CMakeFiles/mymuduo.dir/Logger.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Logger.cc.o.d"
   "/home/me/mymuduo/Poller.cc" "CMakeFiles/mymuduo.dir/Poller.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Poller.cc.o.d"
+  "/home/me/mymuduo/Socket.cc" "CMakeFiles/mymuduo.dir/Socket.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Socket.cc.o.d"
   "/home/me/mymuduo/TcpConnection.cc" "CMakeFiles/mymuduo.dir/TcpConnection.cc.o" "gcc" "CMakeFiles/mymuduo.dir/TcpConnection.cc.o.d"
   "/home/me/mymuduo/TcpServer.cc" "CMakeFiles/mymuduo.dir/TcpServer.cc.o" "gcc" "CMakeFiles/mymuduo.dir/TcpServer.cc.o.d"
   "/home/me/mymuduo/Thread.cc" "CMakeFiles/mymuduo.dir/Thread.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Thread.cc.o.d"

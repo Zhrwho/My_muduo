@@ -369,6 +369,30 @@ Poller.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Poller.cc.s
 .PHONY : Poller.cc.s
 
+Socket.o: Socket.cc.o
+.PHONY : Socket.o
+
+# target to build an object file
+Socket.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Socket.cc.o
+.PHONY : Socket.cc.o
+
+Socket.i: Socket.cc.i
+.PHONY : Socket.i
+
+# target to preprocess a source file
+Socket.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Socket.cc.i
+.PHONY : Socket.cc.i
+
+Socket.s: Socket.cc.s
+.PHONY : Socket.s
+
+# target to generate assembly for a file
+Socket.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mymuduo.dir/build.make CMakeFiles/mymuduo.dir/Socket.cc.s
+.PHONY : Socket.cc.s
+
 TcpConnection.o: TcpConnection.cc.o
 .PHONY : TcpConnection.o
 
@@ -504,6 +528,9 @@ help:
 	@echo "... Poller.o"
 	@echo "... Poller.i"
 	@echo "... Poller.s"
+	@echo "... Socket.o"
+	@echo "... Socket.i"
+	@echo "... Socket.s"
 	@echo "... TcpConnection.o"
 	@echo "... TcpConnection.i"
 	@echo "... TcpConnection.s"
