@@ -45,6 +45,12 @@ void Thread::start()
         sem_post(&sem);
 
         func_(); 
+        /* Thread::Thread(ThreadFunc func, const std::string& name)
+            : func_(func),
+            name_(name)
+        {}*/
+        /* threadFunc?*/
+        /* thread_(std::bind(&EventLoopThread::threadFunc, this), name) */ 
     }));
     /* 这里必须等待获取上面新创建的线程的tid值  */
     sem_wait(&sem);

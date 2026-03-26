@@ -20,7 +20,7 @@
     using ThreadFunc = std::function<void()>;
 
     /* 线程名字默认为空 */
-    explicit Thread(ThreadFunc, const std::string& name = std::string());
+    explicit Thread(ThreadFunc func, const std::string& name = std::string());
     ~Thread();
 
     void start();
