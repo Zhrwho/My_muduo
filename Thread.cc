@@ -49,6 +49,7 @@ void Thread::start()
             : func_(func),
             name_(name)
         {}*/
+       /* func_() 就是执行下面的 threadFunc,会创建一个独立的eventloop */ 
         /* threadFunc?*/
         /* thread_(std::bind(&EventLoopThread::threadFunc, this), name) */ 
     }));

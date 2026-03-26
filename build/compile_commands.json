@@ -26,6 +26,16 @@
 },
 {
   "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/EventLoopThread.cc.o -c /home/me/mymuduo/EventLoopThread.cc",
+  "file": "/home/me/mymuduo/EventLoopThread.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/EventLoopThreadPool.cc.o -c /home/me/mymuduo/EventLoopThreadPool.cc",
+  "file": "/home/me/mymuduo/EventLoopThreadPool.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
   "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/InetAddress.cc.o -c /home/me/mymuduo/InetAddress.cc",
   "file": "/home/me/mymuduo/InetAddress.cc"
 },

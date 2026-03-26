@@ -28,10 +28,14 @@ EventLoopThread::~EventLoopThread()
     }
 }
 
+/**
+ * @brief 开启循环，等待线程loop创建后退出，返回loop
+ * @return 返回线程对应的Loop
+ */
 EventLoop* EventLoopThread::startLoop()
 {
     thread_.start(); // 启动底层的 新 线程
-    /* func_() 就是执行下面的 threadFunc? */
+    /* func_() 就是执行下面的 threadFunc,会创建一个独立的eventloop */
 
     EventLoop *loop = nullptr;
     {
@@ -45,11 +49,15 @@ EventLoop* EventLoopThread::startLoop()
     return loop;
 }
 
-// 下面这个方法，实在单独的新线程里面运行的
+// 下面这个方法，是在单独的新线程里面运行的
+/**
+ * @brief 线程执行体，会实例化一个eventloop
+ */
 void EventLoopThread::threadFunc()
 {
     EventLoop loop; // 创建一个独立的eventloop，和上面的线程是一一对应的，one loop per thread
-
+    /* 在当前线程下创建的loop, 创建的时候就会调用构造函数, 进行构造, 将当前线程tid记录*/
+    
     if (callback_)
     {
         callback_(&loop);
