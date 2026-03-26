@@ -1,6 +1,6 @@
 /**
  * @brief 线程封装类
- * @date 2026.03.26
+ * @date 2026.03
  */
 
  #include "Thread.h"
