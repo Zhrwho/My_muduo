@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/me/mymuduo/Acceptor.cc" "CMakeFiles/mymuduo.dir/Acceptor.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Acceptor.cc.o.d"
+  "/home/me/mymuduo/Buffer.cc" "CMakeFiles/mymuduo.dir/Buffer.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Buffer.cc.o.d"
   "/home/me/mymuduo/Channel.cc" "CMakeFiles/mymuduo.dir/Channel.cc.o" "gcc" "CMakeFiles/mymuduo.dir/Channel.cc.o.d"
   "/home/me/mymuduo/CurrentThread.cc" "CMakeFiles/mymuduo.dir/CurrentThread.cc.o" "gcc" "CMakeFiles/mymuduo.dir/CurrentThread.cc.o.d"
   "/home/me/mymuduo/EpollPoller.cc" "CMakeFiles/mymuduo.dir/EpollPoller.cc.o" "gcc" "CMakeFiles/mymuduo.dir/EpollPoller.cc.o.d"

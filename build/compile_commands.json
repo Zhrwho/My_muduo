@@ -6,6 +6,11 @@
 },
 {
   "directory": "/home/me/mymuduo/build",
+  "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Buffer.cc.o -c /home/me/mymuduo/Buffer.cc",
+  "file": "/home/me/mymuduo/Buffer.cc"
+},
+{
+  "directory": "/home/me/mymuduo/build",
   "command": "/usr/bin/g++ -Dmymuduo_EXPORTS   -g -std=c++11 -fPIC -g -fPIC -o CMakeFiles/mymuduo.dir/Channel.cc.o -c /home/me/mymuduo/Channel.cc",
   "file": "/home/me/mymuduo/Channel.cc"
 },
