@@ -34,8 +34,9 @@ EventLoopThread::~EventLoopThread()
  */
 EventLoop* EventLoopThread::startLoop()
 {
-    thread_.start(); // 启动底层的 新 线程
-    /* func_() 就是执行下面的 threadFunc,会创建一个独立的eventloop */
+    /* start里的func_() 就是执行下面的 threadFunc,会创建一个独立的eventloop */
+    thread_.start(); // 启动底层的 新 线程 ,执行下面的threadFunc
+
 
     EventLoop *loop = nullptr;
     {

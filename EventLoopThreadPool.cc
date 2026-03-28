@@ -41,6 +41,7 @@ void EventLoopThreadPool::start(const ThreadInitCallback &cb)
         const std::string &name) */
         threads_.push_back(std::unique_ptr<EventLoopThread>(t));
         loops_.push_back(t->startLoop()); // 底层创建线程，绑定一个新的EventLoop，并返回该loop的地址
+        /* 创建subloop */
     }
 
     // 整个服务端只有一个线程，运行着baseloop
@@ -57,7 +58,7 @@ void EventLoopThreadPool::start(const ThreadInitCallback &cb)
 EventLoop* EventLoopThreadPool::getNextLoop()
 {
     /* io 线程: 只做新用户的连接事件 */
-    EventLoop *loop = baseLoop_; /*先指向mainloop,用户创建的那个*/
+    EventLoop *loop = baseLoop_;  /* 指针 先指向mainloop,用户创建的那个*/
 
     /* worker 线程: 处理已连接用户的读写事件 */
     if (!loops_.empty()) // 通过轮询获取下一个处理事件的loop

@@ -29,7 +29,7 @@ static int createNonblocking()
 
 
 Acceptor::Acceptor(EventLoop* loop, const InetAddress &listenAddr, bool reuseport)
-    : loop_(loop)
+    : loop_(loop)   // 外边传进来的
     , acceptSocket_(createNonblocking()) /*需要一个fd*/       /* 创建套接字 */
     , acceptChannel_(loop, acceptSocket_.fd()) /*channel类型的变量初始化*/
     , listenning_(false) /*channel通过loop和底层的poller通信*/
