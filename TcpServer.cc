@@ -23,7 +23,12 @@ static EventLoop* CheckLoopNotNull(EventLoop *loop)
 
     
 /*关键就是接收了一个mainloop*/
-
+/**
+ * @brief 构造函数，，构造后设置新连接产生回调
+ * @param loop 传入的EventLoop指针
+ * @param listenAddr 传入的监听socket地址
+ * @param nameArg 传入的Server名称
+ */
 TcpServer::TcpServer(EventLoop* loop    // 外边传进来的
             , const InetAddress& listenAddr
             , const std::string& nameArg
@@ -45,11 +50,15 @@ TcpServer::TcpServer(EventLoop* loop    // 外边传进来的
                                         std::placeholders::_1, std::placeholders::_2)); 
                                         /*传入两个参数:connfd和peerAddr*/
 }
+
+/**
+ * @brief 析构函数，遍历所有连接并销毁
+ */
 TcpServer::~TcpServer()
 {
     for ( auto& item : connections_)
     {
-        /*这个局部的shaerd_ptr对象出右括号可以自动释放 new出来的tcpconnection对象资源*/
+        /*这个局部的shaerd_ptr对象出右括号可以自动释放new出来的tcpconnection对象资源*/
         TcpConnectionPtr conn(item.second); 
         item.second.reset();
         /*先释放就找不到conn了*/
@@ -60,12 +69,18 @@ TcpServer::~TcpServer()
     }
 }
 
+/**
+ * @brief 设置线程数量
+ * @param nunThreads 线程数量
+ */
 void TcpServer::setThreadNum(int numThreads) /*设置底层subloop的个数*/
 {
     threadPool_->setThreadNum(numThreads); /*给底层的threadPool设置numberthreads*/
 }
 
-
+/**
+ * @brief 开启事件循环，创建线程，主loop开启监听
+ */
 void TcpServer::start() /*开启服务器监听*/
 {
     if( started_++ == 0 )/*防止一个TcpServer对象被start多次*/
@@ -81,6 +96,11 @@ void TcpServer::start() /*开启服务器监听*/
 }
 
 /*有一个新的客户端的连接，acceptor会执行这个回调操作*/
+/**
+ * @brief 新连接处理函数，为其创建TcpConnection，将连接分配给子loop，并设置其回调
+ * @param sockfd 新连接fd
+ * @param peerAddr 新连接对端socket地址
+ */
 void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) /* 新连接来,参数在acceptor::handleRead里的coonfd,peerAddr */
 {
     /*轮询算法，选择一个loop，来管理channel*/
@@ -111,9 +131,9 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) /* 新连
                             sockfd,
                             localAddr,
                             peerAddr));
-    
+    /* 建立连接列表 */
     connections_[connName] = conn; /*map键值对插入*/
-    /*下面的回调都是用户设置给TcpServer的，Tcpserver设置给connection，设置给channel，再注册到poller上，最后poller通知channel调用channel*/
+    /*下面的回调都是用户设置给TcpServer的，Tcpserver设置给connection，设置给channel，再注册到poller上，最后poller通知channel调用回调*/
     conn->setConnectionCallback(connectionCallback_);
     conn->setMessageCallback(messageCallback_);
     conn->setWriteCompleteCallback(writeCompleteCallback_);
@@ -126,11 +146,19 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr) /* 新连
     ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
 }
 
+/**
+ * @brief 删除连接处理函数，将销毁连接函数注册到其queueinloop
+ * @param conn 要删除的连接
+ */
 void TcpServer::removeConnection(const TcpConnectionPtr& conn)
 {
     loop_->runInLoop(std::bind(&TcpServer::removeConnectionInLoop, this, conn));
 }
 
+/**
+ * @brief 删除连接处理函数，首先从连接列表中删除，随后将销毁链接函数添加到其回调队列
+ * @param conn 要删除的连接
+ */
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
 {
     LOG_INFO("TcpServer::removeConnectionInLoop [%s] - connection [%s] \n", name_.c_str(), conn->name().c_str());
