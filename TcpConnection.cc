@@ -1,3 +1,8 @@
+/**
+ * @brief 
+ * @date 2026.03.22
+ * 连接客户端和客户端,一条已建立连接的链路(在subloop管理)
+ */
 #include "TcpConnection.h"
 #include "Logger.h"
 #include "Socket.h"
@@ -14,7 +19,11 @@
 #include <netinet/tcp.h>
 #include <string>
 
-
+/**
+ * @brief 检查eventloop是否为空
+ * @param loop 待检查的eventloop
+ */
+/* static避免名字冲突 */
 static EventLoop* CheckLoopNotNull(EventLoop *loop)
 {
     if(loop == nullptr)
@@ -68,12 +77,17 @@ TcpConnection::~TcpConnection()
         name_.c_str(), channel_->fd(), (int)state_);
 }
 
-
- void TcpConnection::send(const std::string &buf) /*发送数据到outputbffer*/
+/**
+ * @brief: 发送数据到outputbffer
+ * @param loop 待检查的eventloop
+ */
+ void TcpConnection::send(const std::string &buf) 
  {
+    /* 已连接状态 */
     if(state_ == kConnected)
     {
-        if(loop_->isInLoopThread())/*判断loop在不在当前线程*/
+        /*判断loop在不在当前线程*/
+        if(loop_->isInLoopThread())
         {
             sendInLoop(buf.c_str(), buf.size());
         }
@@ -87,15 +101,22 @@ TcpConnection::~TcpConnection()
     }
  }
 
+
  /**
-  * 发送数据 应用写的快，而内核发送数据慢，需要把待发送数据写入缓冲区 而且设置水位回调防止发送太快
-  */
+ * @brief 向connection对应channel的fd发送数据，一次没写完则使能channel写事件(enablewriting)
+ * @param data 数据内容
+ * @param len 数据长度
+ * 
+ * 发送数据 应用写的快，而内核发送数据慢，
+ * 需要把待发送数据写入缓冲区 而且设置水位回调防止发送太快
+ */
  void TcpConnection::sendInLoop(const void* data, size_t len)
  {
     ssize_t nwrote = 0;
     ssize_t remaining = 0;/*没发送完的数据*/
     bool faultError = false;
-    if(state_ == kDisconncted) /*之前调用过shutdown，不能再调用send了*/
+    /*之前调用过shutdown，不能再调用send了*/
+    if(state_ == kDisconncted) 
     {
         LOG_ERROR("DisConnectied, give up writing!");
         return;
@@ -131,7 +152,7 @@ TcpConnection::~TcpConnection()
     }
 
     /*说明连接正常，当前这一次write并没有把数据全部发送出去，所以剩余的数据需要保存到outputbuffer*/
-    /*然后给channel注册epollout事件， poller 发现tcp的发送缓冲区有空间，会通知相应的sock(channel)，调用handlewrite回调方法*/
+    /*然后给channel注册epollout事件， poller 发现tcp的发送缓冲区有空间，会通知相应的sock(channel)，调用writeCallback_(handlewrite)回调方法*/
     /*对于channel来说的writecallback, 是tcpconnection给的handlewrite*/
     /*最终也就是调用TcpConnection::handlewrite方法，把发送缓冲区的数据全部发送完成*/
     if(!faultError && remaining > 0)
@@ -156,6 +177,10 @@ TcpConnection::~TcpConnection()
 
  }
 
+/**
+ * @brief 关闭连接，向loop中添加shutdownInLoop
+ * 用户调用
+ */
 void TcpConnection::shutdown()
 {
     if(state_ == kConnected)
@@ -166,31 +191,34 @@ void TcpConnection::shutdown()
     }
 }
 
-
+/**
+ * @brief 在channel无写事件时，关闭socket写端
+ */
 void TcpConnection::shutdownInLoop()
 {
     /*isWriting() = “当前是否在监听 EPOLLOUT（写事件）”*/
-    if(!channel_->isWriting()) /*channel不在写状态，说明当前outputbuffer中的数据已经全部发送完成*/
+    /*channel不在写状态，说明当前outputbuffer中的数据已经全部发送完成*/
+    if(!channel_->isWriting()) 
     /*数据发送完，channel不是iswriting才会真的shutdownInloop*/
     /*所以即使上面的shutdown设置了状态为kdisconnecting,也不会真的shutdown，而是会在handlewrite里面一直写*/
-    /*261行左右：                if(state_ == kDisconnecting) /*正在关闭*/
+    /*301行左右：                if(state_ == kDisconnecting) /*正在关闭*/
     /*直到，handlewrite把所有数据都写完了！又发现这个state变了，知道调用了shutdown，才会去执行这个shutdownInloop!*/
     {
-        socket_->shutdownWrite(); /*socket.cc文件，关闭写端，会触发EPOLLHUP*/
+        /*socket.cc文件，关闭写端，会触发EPOLLHUP*/
+        socket_->shutdownWrite(); 
         /*就会调用channel的closecallback*/
-        /*会回调tcpconnection 的hanelclose方法*/
+        /*会回调tcpconnection 的handleclose方法*/
     }
 }
 
- 
-
-
- /*TcpServer调用*/
-/*连接建立*/
+/**
+ * @brief 建立连接，使能channel读，TcpServer调用,执行连接回调
+ */
 void TcpConnection::connectEstablished()
 {
     setState(kConnected);/*连接成功,记录state*/
-    channel_->tie(shared_from_this()); /*tie转化为强智能指针，底层指向的资源不会被释放*/
+    /*tie转化为强智能指针，底层指向的资源不会被释放*/
+    channel_->tie(shared_from_this()); 
     /*保证Tcpconnection不会被销毁*/
     channel_->enableReading(); /*向poller注册channel的读事件（epollin事件）*/
 
@@ -199,13 +227,19 @@ void TcpConnection::connectEstablished()
     connectionCallback_(shared_from_this());
 
 }
+
+/**
+ * @brief 销毁连接，使能channel所有事件，执行连接回调，在loop中remove channel
+ */
 /*连接销毁,连接关闭*/
 void TcpConnection::connectDestroyed()
 {
     if(state_ == kConnected)
     {
-        setState(kDisconncted); /*状态设置为未连接*/
-        channel_->disableAll(); /*把channel的所有感兴趣的事件，从poller中删除掉*/
+        /*状态设置为未连接*/
+        setState(kDisconncted);
+        /*把channel的所有感兴趣的事件，从poller中删除掉*/
+        channel_->disableAll(); 
         
 
         connectionCallback_(shared_from_this()); /*断开连接*/
@@ -213,7 +247,9 @@ void TcpConnection::connectDestroyed()
     channel_->remove(); /*把channel从poller中删除掉*/
 }
 
-
+/**
+ * @brief 读事件处理，从fd读到inputbuffer，调用消息回调
+ */
 void TcpConnection::handleRead(Timestamp receiveTime)
 /*当 socket 可读时，把内核数据读到用户缓冲区，并交给用户回调处理*/
 /*channel上的fd有事件可读时，就读*/
@@ -238,19 +274,24 @@ void TcpConnection::handleRead(Timestamp receiveTime)
 
 }
 
-
+/**
+ * @brief 写事件处理，将outputbuffer中的数据写到fd，写完毕调用回调
+ */
 void TcpConnection::handleWrite()
 {
     if(channel_->isWriting()) /*监听是否可写*/
     {
         int savedErrno = 0;
+        /* 写到channel_fd() */
         ssize_t n = outputBuffer_.writeFd(channel_->fd(), &savedErrno);
         /*从用户 Buffer 读取数据 → 写入内核 socket 缓冲区*/
 
         if( n > 0)
         {
-            outputBuffer_.retrieve(n);  /*相当于把读的下标指针往后移动一会*//*所以移动读下标*/
-            if(outputBuffer_.readableBytes() == 0) /*发送完成，完全没有数据了*/
+            /*相当于把读的下标指针往后移动一会*//*所以移动读下标*/
+            outputBuffer_.retrieve(n);  
+            /* 发送完成，完全没有数据了 */
+            if(outputBuffer_.readableBytes() == 0) 
             {
                 channel_ ->disableWriting();
                 if(writeCompleteCallback_) /*如果有这么个回调就执行回调*/
@@ -260,7 +301,8 @@ void TcpConnection::handleWrite()
                         std::bind(writeCompleteCallback_, shared_from_this())
                     );
                 }
-                if(state_ == kDisconnecting) /*正在关闭*/
+                /*正在关闭*/
+                if(state_ == kDisconnecting) 
                 {
                     shutdownInLoop();
                 }
@@ -276,21 +318,26 @@ void TcpConnection::handleWrite()
     }
 }
 
-
+/**
+ * @brief 关闭事件处理，失能channel所有事件，调用连接、关闭回调
+ */
 /*poller  => channel::closeCallback => TcpConnection::handleClose*/
 void TcpConnection::handleClose()
 {
     LOG_INFO("fd = %d state = %d \n", channel_->fd(), (int)state_);
     assert(state_ == kConnected || state_ == kDisconnecting);
     setState(kDisconncted);
-    channel_ -> disableAll(); /*chanel所有的事件都不感兴趣了，从eopllpoller，ctl删掉*/
+    /*chanel所有的事件都不感兴趣了，从eopllpoller，ctl删掉*/
+    channel_ -> disableAll();
 
     TcpConnectionPtr connPtr(shared_from_this());
     connectionCallback_(connPtr); /*执行连接关闭的回调*/
     closeCallback_(connPtr);      /*关闭连接的回调*/ /*执行的是Tcpserver：：removeConnectin回调方法*/
 }
 
-
+/**
+ * @brief 错误事件处理，获取错误码，打日志
+ */
 void TcpConnection::handleError()
 {
     int optval;

@@ -1,3 +1,10 @@
+/**
+ * @brief:TcpServer通过Acceptor
+ * 有一个新用户连接，通过Acceptor函数拿到connfd
+ * 然后就可以打包TcpConnection 设置相应回调
+ * 再把回调给相应的Channel,
+ * channel再注册到poller上，poller监听到事件之后，就会调用channel的回调操作
+ */
 #pragma once
 
 #include "noncopyable.h"
@@ -13,14 +20,6 @@
 class Channel;
 class EventLoop;
 class Socket;
-
-/**
- * @brief:TcpServer通过Acceptor
- * 有一个新用户连接，通过Acceptor函数拿到connfd
- * 然后就可以打包TcpConnection 设置相应回调
- * 再把回调给相应的Channel,
- * channel再注册到poller上，poller监听到事件之后，就会调用channel的回调操作
- */
 
 class TcpConnection : public mymuduo::noncopyable, public std::enable_shared_from_this<TcpConnection> /*支持通过智能指针安全获取自身*/
 {
@@ -72,7 +71,8 @@ private:
     
    void setState(StateE state) { state_ = state; }
 
-    EventLoop *loop_; /*绝对不是baseloop，因为TcpConnection 都是在subloop里面管理的*/
+   /*绝对不是baseloop，因为TcpConnection 都是在subloop里面管理的*/
+    EventLoop *loop_; 
     const std::string name_;
     std::atomic_int state_;
     bool reading_;
